@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Biography {
     public static void main(String[] args) {
 
@@ -33,5 +36,56 @@ public class Biography {
 
         //YOUR CODE HERE
 
+        Scanner input = new Scanner(System.in);
+        System.out.println("What is your favorite author's first name?");
+        String firstName = input.nextLine();
+
+        System.out.println("What is your favorite author's last name?");
+        String lastName = input.nextLine();
+
+        System.out.println("Where is your favorite author from?");
+        String country = input.nextLine();
+
+        System.out.println("Is your favorite author alive? Y/N");
+        boolean isAlive = input.next().toUpperCase().startsWith("Y");
+
+        int age = 0;
+
+        if (isAlive) {
+            System.out.println("How old is your favorite author?");
+            age = input.nextInt();
+        }
+        ArrayList<Book> books = new ArrayList<>();
+        String bookInfo = "";
+        do {
+            System.out.println("Would you like to enter book information? (Y/N)");
+            bookInfo = input.next();
+            input.nextLine();
+
+            if (bookInfo.toUpperCase().startsWith("Y")) {
+                System.out.println("What is the book name?");
+                String name = input.nextLine();
+
+                System.out.println("What is the genre of the book?");
+                String genre = input.next();
+
+                System.out.println("How many pages does book have?");
+                int numberOfPages = input.nextInt();
+                books.add(new Book(name, genre, numberOfPages)); //makes it into a list
+
+            }
+
+
+        }
+
+        while (bookInfo.toUpperCase().startsWith("Y")); //when user inputs Y for book information
+        Author author = new Author(firstName, lastName, country, isAlive);
+        System.out.println("Authors information = " + author);
+        System.out.println("Author's books are as listed below: ");
+
+        for (Book i : books) {
+            System.out.println(i);
+
+        }
     }
 }
