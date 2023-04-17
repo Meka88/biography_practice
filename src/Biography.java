@@ -80,12 +80,13 @@ public class Biography {
 
         while (bookInfo.toUpperCase().startsWith("Y")); //when user inputs Y for book information
         Author author = new Author(firstName, lastName, country, isAlive);
-        System.out.println("Authors information = " + author);
+        //Author author1 = new Author(firstName, lastName, country, age);
+        if(!isAlive)System.out.println("Authors information = " + author);
+        //else System.out.println("Authors information = " + );
         System.out.println("Author's books are as listed below: ");
 
         for (Book i : books) {
             System.out.println(i);
-
         }
     }
 }

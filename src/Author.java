@@ -37,10 +37,10 @@ public class Author {
     public ArrayList<Book> listOfBooks = new ArrayList<Book>();
 
     public Author(String firstName, String lastName, String country, boolean isAlive) {
-        this.firstName=firstName;
-        this.lastName= lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.country = country;
-        this.isAlive=isAlive;
+        this.isAlive = isAlive;
     }
 
     /*
