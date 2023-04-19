@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Biography {
@@ -47,46 +48,51 @@ public class Biography {
         String country = input.nextLine();
 
         System.out.println("Is your favorite author alive? Y/N");
-        boolean isAlive = input.next().toUpperCase().startsWith("Y");
+        String isAliveInput = input.nextLine();
 
+        while (!isAliveInput.equalsIgnoreCase("Y") && !isAliveInput.equalsIgnoreCase("N")) {
+            System.out.println("Input was invalid, please use only 'Y' or 'N'\n");
+            System.out.println("Is your favorite author alive? Y/N");
+            isAliveInput = input.nextLine();
+        }
+
+        boolean isAlive = isAliveInput.equalsIgnoreCase("Y");
         int age = 0;
 
         if (isAlive) {
             System.out.println("How old is your favorite author?");
             age = input.nextInt();
+            input.nextLine();
         }
-        ArrayList<Book> books = new ArrayList<>();
-        String bookInfo = "";
-        do {
+
+        ArrayList<Book> listOfBooks = new ArrayList<>();
+
+        do{
             System.out.println("Would you like to enter book information? (Y/N)");
-            bookInfo = input.next();
+            String bookCheck = input.nextLine();
+            if (bookCheck.toUpperCase().startsWith("N")) break;
+
+            System.out.println("What is the name of the book?");
+            String bookName = input.nextLine();
+
+            System.out.println("What is genre of the book?");
+            String bookGenre = input.nextLine();
+
+            System.out.println("How many pages does book have?");
+            int page = input.nextInt();
             input.nextLine();
 
-            if (bookInfo.toUpperCase().startsWith("Y")) {
-                System.out.println("What is the book name?");
-                String name = input.nextLine();
-
-                System.out.println("What is the genre of the book?");
-                String genre = input.next();
-
-                System.out.println("How many pages does book have?");
-                int numberOfPages = input.nextInt();
-                books.add(new Book(name, genre, numberOfPages)); //makes it into a list
-
-            }
-
-
+            Book bookInfo = new Book(bookName, bookGenre, page);
+            listOfBooks.add(bookInfo);
         }
+        while (true);
 
-        while (bookInfo.toUpperCase().startsWith("Y")); //when user inputs Y for book information
-        Author author = new Author(firstName, lastName, country, isAlive);
-        //Author author1 = new Author(firstName, lastName, country, age);
-        if(!isAlive)System.out.println("Authors information = " + author);
-        //else System.out.println("Authors information = " + );
-        System.out.println("Author's books are as listed below: ");
+        Author author = new Author(firstName, lastName, country, isAlive, age, listOfBooks);
+        System.out.println("Author's information = " + author);
 
-        for (Book i : books) {
-            System.out.println(i);
+        if (!author.listOfBooks.isEmpty()) {
+            System.out.println("Author's books are as listed below:");
+            author.listOfBooks.forEach(System.out::println);
         }
     }
 }
